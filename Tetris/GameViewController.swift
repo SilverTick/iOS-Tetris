@@ -156,12 +156,34 @@ private extension GameViewController {
         if !shapeCanDrop {
             squaresInPlay = []
             fallTimer.invalidate()
+            checkLines()
             newShape()
         }
             // Shape still can drop
         else { moveShapesInPlay(direction: .down) }
         
         semaphore.signal()
+    }
+    
+    func checkLines() {
+        for r in 0..<gameRows {
+            var rowFilled = true
+            for c in 0..<gameColumns {
+                if gameGrid?[r][c] == nil {
+                    rowFilled = false
+                    break
+                }
+            }
+            
+            if rowFilled {
+                for c in 0..<gameColumns {
+                    if let square = gameGrid?[r][c] {
+                        square.removeFromSuperview()
+                        gameGrid?[r][c] = nil
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func applyHorizontalMovement(_ sender: UISwipeGestureRecognizer) {
