@@ -279,16 +279,20 @@ private extension GameViewController {
             for r in center.row - 2...center.row + 2 {
                 for c in center.column - 2...center.column + 2 {
                     if r < 0 || r > gameRows - 1 || c < 0 || c > gameColumns - 1 { continue }
-                    if let squareHere = gameGrid?[r][c], squaresInPlay.contains(squareHere) {
-                        let dr = squareHere.row - center.row, dc = squareHere.column - center.column
-                        let newC = center.column - dr, newR = center.row + dc
-                        rotatedGrid[newR - center.row + 2][newC - center.column + 2] = gameGrid?[r][c]
-                        
-                        // Update square view display
-                        squareHere.row = newR
-                        squareHere.column = newC
-                        squareHere.frame.origin = CGPoint(x: CGFloat(squareHere.column) * squareSize,
-                                                          y: CGFloat(squareHere.row) * squareSize)
+                    if let squareHere = gameGrid?[r][c] {
+                        if squaresInPlay.contains(squareHere) {
+                            let dr = squareHere.row - center.row, dc = squareHere.column - center.column
+                            let newC = center.column - dr, newR = center.row + dc
+                            rotatedGrid[newR - center.row + 2][newC - center.column + 2] = gameGrid?[r][c]
+                            
+                            // Update square view display
+                            squareHere.row = newR
+                            squareHere.column = newC
+                            squareHere.frame.origin = CGPoint(x: CGFloat(squareHere.column) * squareSize,
+                                                              y: CGFloat(squareHere.row) * squareSize)
+                        } else {
+                            rotatedGrid[r - center.row + 2][c - center.column + 2] = gameGrid?[r][c]
+                        }
                     }
                 }
             }
