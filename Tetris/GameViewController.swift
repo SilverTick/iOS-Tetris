@@ -57,7 +57,7 @@ private extension GameViewController {
         squareSize = newGameBoard.frame.width / 10
         newGameBoard.frame.size.height = squareSize * CGFloat(gameRows) + topBottomInset * 2
         gameBoard = newGameBoard
-        gameBoard?.backgroundColor = .gray
+        gameBoard?.backgroundColor = .white
         view.addSubview(gameBoard!)
         
         // Initalize 20x10 game grid
@@ -87,6 +87,28 @@ private extension GameViewController {
         
         // Start dropping tiles
         newShape()
+    }
+    
+    func drawGameBoard() {
+        let labels = gameBoard?.subviews.flatMap { $0 as? UILabel }
+        if let labels = labels {
+            for label in labels {
+                label.removeFromSuperview()
+            }
+        }
+        
+        for r in 0..<gameRows {
+            for c in 0..<gameColumns {
+                if gameGrid?[r][c] != nil {
+                    let label = UILabel(frame: CGRect(x: CGFloat(c) * squareSize,
+                                                      y: CGFloat(r) * squareSize,
+                                                      width: squareSize,
+                                                      height: squareSize))
+                    label.text = "T"
+                    gameBoard?.addSubview(label)
+                }
+            }
+        }
     }
     
     func newShape() {
@@ -162,6 +184,7 @@ private extension GameViewController {
             // Shape still can drop
         else { moveShapesInPlay(direction: .down) }
         
+        drawGameBoard()
         semaphore.signal()
     }
     
@@ -217,6 +240,7 @@ private extension GameViewController {
         // Try to rotate squares around the center point
         // Formula for clockwise rotation: (row, col) -> (col, -row)
         guard let center = squaresInPlayCenter else {
+            semaphore.signal()
             return
         }
         
