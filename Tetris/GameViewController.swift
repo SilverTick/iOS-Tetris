@@ -20,8 +20,10 @@ enum Direction {
     case left, right, down
 }
 
+let TESTING = false
+
 class GameViewController: UIViewController {
-    var gameRows: Int = 15
+    var gameRows: Int = 17
     var gameColumns: Int = 10
     var gameGrid: [[Square?]]?
     var topBottomInset: CGFloat = 5.0
@@ -90,22 +92,24 @@ private extension GameViewController {
     }
     
     func drawGameBoard() {
-        let labels = gameBoard?.subviews.flatMap { $0 as? UILabel }
-        if let labels = labels {
-            for label in labels {
-                label.removeFromSuperview()
+        if TESTING {
+            let labels = gameBoard?.subviews.flatMap { $0 as? UILabel }
+            if let labels = labels {
+                for label in labels {
+                    label.removeFromSuperview()
+                }
             }
-        }
-        
-        for r in 0..<gameRows {
-            for c in 0..<gameColumns {
-                if gameGrid?[r][c] != nil {
-                    let label = UILabel(frame: CGRect(x: CGFloat(c) * squareSize,
-                                                      y: CGFloat(r) * squareSize,
-                                                      width: squareSize,
-                                                      height: squareSize))
-                    label.text = "T"
-                    gameBoard?.addSubview(label)
+            
+            for r in 0..<gameRows {
+                for c in 0..<gameColumns {
+                    if gameGrid?[r][c] != nil {
+                        let label = UILabel(frame: CGRect(x: CGFloat(c) * squareSize,
+                                                          y: CGFloat(r) * squareSize,
+                                                          width: squareSize,
+                                                          height: squareSize))
+                        label.text = "T"
+                        gameBoard?.addSubview(label)
+                    }
                 }
             }
         }
@@ -189,7 +193,8 @@ private extension GameViewController {
     }
     
     func checkLines() {
-        for r in 0..<gameRows {
+        var r = 0
+        while r < gameRows {
             var rowFilled = true
             for c in 0..<gameColumns {
                 if gameGrid?[r][c] == nil {
@@ -205,8 +210,27 @@ private extension GameViewController {
                         gameGrid?[r][c] = nil
                     }
                 }
+                shiftAllLinesDown(fromRow: r)
+            } else {
+                r += 1
             }
         }
+    }
+    
+    func shiftAllLinesDown(fromRow: Int) {
+        for r in (1...fromRow).reversed() {
+            for c in 0..<gameColumns {
+                if let square = gameGrid?[r - 1][c], !squaresInPlay.contains(square) {
+                    gameGrid?[r][c] = square
+                    gameGrid?[r - 1][c] = nil
+                    square.row += 1
+                    square.frame.origin = CGPoint(x: CGFloat(square.column) * squareSize,
+                                                  y: CGFloat(square.row) * squareSize)
+                }
+            }
+        }
+        
+        drawGameBoard()
     }
     
     @IBAction func applyHorizontalMovement(_ sender: UISwipeGestureRecognizer) {
