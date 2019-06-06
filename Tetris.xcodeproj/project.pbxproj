@@ -13,7 +13,6 @@
 		4220004922A4C41B0056FD0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4220004722A4C41B0056FD0F /* LaunchScreen.storyboard */; };
 		4220005122A4C4FF0056FD0F /* BackgroundPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4220005022A4C4FF0056FD0F /* BackgroundPickerViewController.swift */; };
 		4220005422A4C5480056FD0F /* BackgroundPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4220005322A4C5480056FD0F /* BackgroundPicker.storyboard */; };
-		4220007422A4E1720056FD0F /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 4220007322A4E1720056FD0F /* Sounds */; };
 		4220007622A4E6940056FD0F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4220007522A4E6940056FD0F /* GameViewController.swift */; };
 		4220007822A4F77A0056FD0F /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4220007722A4F77A0056FD0F /* Square.swift */; };
 /* End PBXBuildFile section */
@@ -27,7 +26,6 @@
 		4220004A22A4C41B0056FD0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4220005022A4C4FF0056FD0F /* BackgroundPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundPickerViewController.swift; sourceTree = "<group>"; };
 		4220005322A4C5480056FD0F /* BackgroundPicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackgroundPicker.storyboard; sourceTree = "<group>"; };
-		4220007322A4E1720056FD0F /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sounds; path = Blocs/Sounds; sourceTree = SOURCE_ROOT; };
 		4220007522A4E6940056FD0F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		4220007722A4F77A0056FD0F /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +69,6 @@
 				4220004522A4C41B0056FD0F /* Assets.xcassets */,
 				4220004722A4C41B0056FD0F /* LaunchScreen.storyboard */,
 				4220004A22A4C41B0056FD0F /* Info.plist */,
-				4220007322A4E1720056FD0F /* Sounds */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -134,7 +131,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4220007422A4E1720056FD0F /* Sounds in Resources */,
 				4220005422A4C5480056FD0F /* BackgroundPicker.storyboard in Resources */,
 				4220004922A4C41B0056FD0F /* LaunchScreen.storyboard in Resources */,
 				4220004622A4C41B0056FD0F /* Assets.xcassets in Resources */,
